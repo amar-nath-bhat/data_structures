@@ -16,7 +16,7 @@ int main()
     for(j=pass-1;j>=0 && a[j]>key;j--)
         a[j+1]=a[j];
 
-        a[j+1]=key;
+    a[j+1]=key;
 
     }
     printf("New sorted array is:\n");
