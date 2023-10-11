@@ -120,27 +120,46 @@ void insert(char s1[], char s2[], int p)
     s1[l1 + l2] = '\0';
 }
 
-void delete_sub(char s1[], char s2[])
-{
-    int l1,l2,temp,i,j,chk=0;
-    l1=length(s1);
-    l2=length(s2);
-    for(i=0; i<l1; i++)
-    {
-      temp = i;
-      for(j=0; j<l2; j++)
-      {
-         if(s1[i]==s2[j])
-            i++;
-      }
-      chk = i-temp;
-      if(chk==l2)
-      {
-         i = temp;
-         for(j=i; j<(l1-l2); j++)
-            s1[j] = s1[j+l2];
-         l1 = l1-l2;
-         s1[j]='\0';
+// void delete_sub(char s1[], char s2[])
+// {
+//     int l1,l2,temp,i,j,chk=0;
+//     l1=length(s1);
+//     l2=length(s2);
+//     for(i=0; i<l1; i++)
+//     {
+//       temp = i;
+//       for(j=0; j<l2; j++)
+//       {
+//          if(s1[i]==s2[j])
+//             i++;
+//       }
+//       chk = i-temp;
+//       if(chk==l2)
+//       {
+//          i = temp;
+//          for(j=i; j<(l1-l2); j++)
+//             s1[j] = s1[j+l2];
+//          l1 = l1-l2;
+//          s1[j]='\0';
+//         }
+//     }
+// }
+
+void delete_sub(char s1[], char s2[]) {
+    int l1 = strlen(s1);
+    int l2 = strlen(s2);
+    int i, j, k;
+
+    for (i = 0; i <= l1 - l2; i++) {
+        for (j = 0; j < l2 && s1[i + j] == s2[j]; j++);
+        
+        if (j == l2) {
+            for (k = i; k < l1 - l2; k++) {
+                s1[k] = s1[k + l2];
+            }
+            s1[k] = '\0'; 
+            l1 -= l2;    
+            i--;         
         }
     }
 }

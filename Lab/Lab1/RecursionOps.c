@@ -16,15 +16,17 @@ int search(int a[], int low, int high, int num) {
 
     return -1; // Element not found
 }
-int sort(int a[], int n, int i){
+
+int sort(int a[], int n, int i)
+{
     int min, t;
     if (i==n-1)
         return;
     min=i;
     for(int j=i+1;j<n;j++)
     {
-    if(a[min]>a[j])
-        min=j;
+        if(a[min]>a[j])
+            min=j;
     }
     if(min!=i){
         t=a[min];
@@ -40,6 +42,7 @@ if (b==0)
 
 return a+multiply(a, b-1);
 }
+
 int main() {
     int option;
     printf("Choose the program you want to execute:\n1.Binary Search\n2.Selection Sort\n3.Multiply\n4.Exit\n");
@@ -90,5 +93,4 @@ int main() {
 
     case 4: exit(0);
     }
-
 }
