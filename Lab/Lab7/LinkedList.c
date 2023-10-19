@@ -206,120 +206,94 @@ struct node* reverse(struct node* start)
     return start;
 }
 
-struct node* concat(struct node* start1, struct node* start2)
-{
-    struct node* temp;
-    temp=start1;
-    if(start1==NULL)
-        return start2;
-    if(start2=NULL)
-        return start1;
-    while(temp->next!=NULL)
-        temp=temp->next;
-    temp->next=start2;
-    return start1;
-}
+struct node* deletealt(struct node* start) {
+    struct node *temp, *prev;
+    temp = start;
+    prev = NULL;
 
-struct node* insert(struct node* start, int data)
-{
-    struct node* newnode = malloc(sizeof(struct node*));
-    if(start==NULL)
-    {
-        start=newnode;
-        newnode->data=data;
-        newnode->next=NULL;
+    while (temp != NULL && temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+        prev->next = temp->next;
+        free(temp); 
+        temp = prev->next;
     }
-    else
-    {
-        struct node *temp;
-        temp=start;
-        while(temp->next!=0)
-        {
-            temp=temp->next;
-        }
-        temp->next=newnode;
-        newnode->data=data;
-        newnode->next=NULL;
-    }
+
     return start;
 }
 
-struct node* merge1(struct node* start1, struct node* start2)
-{
-    struct node* start=NULL;
-    struct node *temp1, *temp2;
-    temp1=start1;
-    temp2=start2;
-    while(temp1!=NULL && temp2!=NULL)
-    {
-        if(temp1->data<temp2->data)
-        {
-            start=insert(start, temp1->data);
-            temp1=temp1->next;
-        }
-        else if(temp1->data>temp2->data)
-        {
-            start=insert(start, temp2->data);
-            temp2=temp2->next;
-        }
-        else
-        {
-            start=insert(start, temp1->data);
-            temp1=temp1->next;
-            temp2=temp2->next;
-        }
-    }
-    while(temp2!=NULL)
-    {
-        start=insert(start, temp2->data);
-        temp2=temp2->next;
-    }
-    while(temp1!=NULL)
-    {
-        start=insert(start, temp1->data);
-        temp1=temp1->next;
-    }
-    return start;
-}
-
-struct node* merge2(struct node* start1, struct node* start2)
-{
-    struct node *temp1, *temp2;
-    temp1=start1;
-    temp2=start2;
-    int pa, pb;
-    
-        if(temp1->data<=temp2->data)
-            pa=1;
-        
-        else if(temp1->data>temp2->data)
-            pb=1;
-        
-
-    while(temp1!=NULL && temp2!=NULL)
-    {
-    }
-
-}
 int main()
 {
-    struct node* start;
-    // start=create(start);
-    // printf("\n");
-    //insertLast(start);
-    //start=insertFirst(start);
-    //start=deleteLast(start);
-    //start=deleteFirst(start);
-    //start=insertPos(start, 3);
-    //start=deletePos(start,3);
-    //start=insertBefore(start, 3);
-    //start=insertAfter(start,3);
-    // start=reverse(start);
-    struct node* start1=NULL;
-    struct node* start2=NULL;
-    start1=create(start1);
-    start2=create(start2);
-    // start=concat(start1, start2);
-    start=merge1(start1,start2);
-    display(start);
+    int index, ele;
+    struct node *start=NULL;
+    start=create(start);
+
+    while (1){
+        printf("\nOptions:\n");
+        printf("1) Insert Last\n");
+        printf("2) Insert First\n");
+        printf("3) Delete Last\n");
+        printf("4) Delete First\n");
+        printf("5) Insert at Position\n");
+        printf("6) Delete at Position\n");
+        printf("7) Insert before\n");
+        printf("8) Insert after\n");
+        printf("9) Traverse list\n");
+        printf("10) Reverse List\n");
+        printf("11) Delete Alternate Nodes\n");
+        printf("12) Exit\n");
+        int choice;
+        scanf("%d",&choice);
+
+        switch(choice){
+            case 1:     start=insertLast(start);
+                        break;
+
+            case 2:     start=insertFirst(start);
+                        break;
+
+            case 3:     start=deleteLast(start);
+                        break;
+
+            case 4:     start=deleteFirst(start);
+                        break;
+
+            case 5:     printf("Enter the position to insert: ");
+                        scanf("%d",&index);
+                        start=insertPos(start, index);
+                        break;
+
+            case 6:     printf("Enter the position to delete: ");
+                        scanf("%d",&index);
+                        start=deletePos(start, index);
+                        break;
+
+            case 7:     printf("Enter the element to insert before: ");
+                        scanf("%d",&ele);
+                        start=insertBefore(start, ele);
+                        break;
+
+            case 8:     printf("Enter the element to insert after: ");
+                        scanf("%d",&ele);
+                        start=insertAfter(start, ele); 
+                        break;
+
+            case 9:     display(start);
+                        break;
+
+            case 10:    start=reverse(start);
+                        break;
+
+            case 11:    start=deletealt(start);
+                        break;
+
+            case 12:    exit(0);
+
+            default: printf("Invalid Choice, try again!\n");
+
+        }
+    }
+    
+    printf("\n");
+
 }
