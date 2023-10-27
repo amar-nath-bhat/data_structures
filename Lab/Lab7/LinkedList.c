@@ -222,6 +222,54 @@ struct node* deletealt(struct node* start) {
     return start;
 }
 
+void swap(struct node* p1, struct node* p2){
+    int temp;
+    temp= p1->data;
+    p1->data = p2->data;
+    p2->data = temp; 
+}
+
+void *sort(struct node* start){
+    struct node *temp, *curr, *min;
+    curr = start;
+
+    while(curr->next){
+        min = curr;
+        temp = curr->next;
+
+        while(temp){
+            if(temp->data < min->data)
+                min = temp;
+
+            temp = temp->next;
+        }
+        swap(min, curr);
+        curr = curr->next;
+    }
+    
+}
+
+void insertInOrder(struct node *start, int data) {
+    struct node *temp = start, *prev = NULL;
+    struct node *newnode = malloc(sizeof(struct node));
+    newnode->data = data;
+    newnode->next = NULL;
+
+    if (start == NULL || (start)->data > data) {
+        newnode->next = start;
+        start = newnode;
+        return;
+    }
+
+    while (temp != NULL && temp->data < data) {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = newnode;
+    newnode->next = temp;
+}
+
+
 int main()
 {
     int index, ele;
@@ -241,7 +289,9 @@ int main()
         printf("9) Traverse list\n");
         printf("10) Reverse List\n");
         printf("11) Delete Alternate Nodes\n");
-        printf("12) Exit\n");
+        printf("12) Sort the list\n");
+        printf("13) Insert in Order\n");
+        printf("0) Exit.\n");
         int choice;
         scanf("%d",&choice);
 
@@ -287,7 +337,15 @@ int main()
             case 11:    start=deletealt(start);
                         break;
 
-            case 12:    exit(0);
+            case 12:    sort(start);
+                        break;
+
+            case 13:    printf("Enter an element to insert: ");
+                        scanf("%d",&ele);
+                        insertInOrder(start, ele);
+                        break;
+
+            case 0:    exit(0);
 
             default: printf("Invalid Choice, try again!\n");
 
