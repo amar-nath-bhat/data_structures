@@ -121,21 +121,22 @@ void display(Node* head){
     }
 }
 
-//Code Not Working Check later
-void reverse(Node* head) {
-    Node *temp, *curr;
-    temp=curr=NULL;
-    while(head!=NULL)
-    {
-        temp=curr;
-        curr=head;
-        head=head->next;
-        curr->next=temp;
-        if(temp)
-            temp->prev=curr;
+
+Node* reverse(Node* head) {
+    Node *prev1, *curr;
+    prev1=curr=NULL;
+    while(head){
+        prev1 = curr;
+        curr =head;
+        head = head->next;
+        curr->next = prev1;
+        if(prev1)
+            prev1->prev = curr;
     }
-    head=temp;
+    head = prev1;
+    return head;
 }
+
 
 
 int main() {

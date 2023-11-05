@@ -128,7 +128,7 @@ struct node* insertPos(struct node* start, int pos)
         temp=temp->next;
         pos--;
     }
-    newnode = malloc(sizeof(struct node*));
+    newnode = malloc(sizeof(struct node));
     printf("Enter the element to add: ");
     scanf("%d",&data);
     newnode->data=data;
@@ -229,7 +229,7 @@ void swap(struct node* p1, struct node* p2){
     p2->data = temp; 
 }
 
-void *sort(struct node* start){
+void sort(struct node* start){
     struct node *temp, *curr, *min;
     curr = start;
 
