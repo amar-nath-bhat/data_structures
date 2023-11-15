@@ -22,7 +22,6 @@ void insertNode(struct node* root, int data){
     struct node* newNode = NULL;
     newNode = createNode(data);
     if(root == NULL){
-        printf("Ji i am here!");
         root = newNode;
         return;
     }
@@ -81,7 +80,7 @@ void inorderDisp(struct node* root){
         curr=curr->left;
         }
         if(top>=0)
-            curr  = Stack[top--];
+            curr = Stack[top--];
         else
             break;
 
@@ -168,10 +167,11 @@ int depth(struct node* root){
         return 0;
     int ldepth = depth(root->left);
     int rdepth = depth(root->right);
-    if(ldepth>rdepth)
-        return ldepth+1;
-    else
-        return rdepth+1;
+    // if(ldepth>rdepth)
+    //     return ldepth+1;
+    // else
+    //     return rdepth+1;
+    return ldepth > rdepth ? ldepth+1 : rdepth+1;
 }
 
 int printAncestors(struct node* root, int target){
@@ -212,11 +212,11 @@ int main(){
     printf("\n");
     preorderDisp(root);
     printf("\n");
-    struct node* parent = findParent(root, 3, root);
+    findParent(root, 3, root);
     printf("\n");
     printf("%d", depth(root));
     printf("\n");
-    printAncestors(root, 8);
+    printAncestors(root, 2);
     printf("\n");
     printf("count of leaf node: %d", countLeaf(root));
 
